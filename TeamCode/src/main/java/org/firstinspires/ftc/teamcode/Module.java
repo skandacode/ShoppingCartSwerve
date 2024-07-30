@@ -25,20 +25,31 @@ public class Module {
         if (before_mod<0){
             return before_mod+360;
         }
-        return 360-before_mod;
+        return before_mod;
     }
     public void setMotors(double topPower, double bottomPower){
-        topPower = inverted ? -topPower : topPower;
-        bottomPower = inverted ? -bottomPower : bottomPower;
+        double denom=Math.max(topPower, bottomPower);
+        if (denom>1){
+            topPower=topPower/denom;
+            bottomPower=bottomPower/denom;
+        }
         topMotor.set(topPower);
         bottomMotor.set(bottomPower);
     }
     public void setModuleCentricPowers(double forward, double strafe){
-        setMotors(forward+strafe, -forward+strafe);//diffy stuff
+        if (inverted){
+            forward=-forward;
+        }
+        setMotors(forward-strafe, -forward-strafe);//diffy stuff
     }
     public void setRobotCentricPowers(double forward, double strafe){
         double moduleHeading=getModuleHeading();
-        Vector2d powerVector=new Vector2d(forward, strafe).rotateBy(-moduleHeading);
+        if (!inverted){
+            moduleHeading=moduleHeading+180;
+            forward=-forward;
+            strafe=-strafe;
+        }
+        Vector2d powerVector=new Vector2d(forward, strafe).rotateBy(moduleHeading);
         setModuleCentricPowers(powerVector.getX(), powerVector.getY());
     }
 }
