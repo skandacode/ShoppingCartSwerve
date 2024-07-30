@@ -13,7 +13,7 @@ public class Module {
     AnalogInput lamprey;
     double lampreyOffset;
     boolean inverted;
-    public Module(HardwareMap hwMap, Telemetry telemetry, String topMotorName, String bottomMotorName, String lampreyName, double lampreyOffset, boolean inverted){
+    public Module(HardwareMap hwMap, String topMotorName, String bottomMotorName, String lampreyName, double lampreyOffset, boolean inverted){
         topMotor=new MotorEx(hwMap, topMotorName);
         bottomMotor=new MotorEx(hwMap, bottomMotorName);
         lamprey=hwMap.analogInput.get(lampreyName);
