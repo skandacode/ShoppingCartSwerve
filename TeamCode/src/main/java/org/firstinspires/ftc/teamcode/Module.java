@@ -44,11 +44,6 @@ public class Module {
     }
     public void setRobotCentricPowers(double forward, double strafe){
         double moduleHeading=getModuleHeading();
-        if (!inverted){
-            moduleHeading=moduleHeading+180;
-            forward=-forward;
-            strafe=-strafe;
-        }
         Vector2d powerVector=new Vector2d(forward, strafe).rotateBy(moduleHeading);
         setModuleCentricPowers(powerVector.getX(), powerVector.getY());
     }
