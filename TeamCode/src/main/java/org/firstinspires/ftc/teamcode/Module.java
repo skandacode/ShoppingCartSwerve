@@ -13,6 +13,7 @@ public class Module {
     AnalogInput lamprey;
     double lampreyOffset;
     boolean inverted;
+    double moduleHeading=0;
     double prevTopPower, prevBottomPower=0;
     public Module(HardwareMap hwMap, String topMotorName, String bottomMotorName, String lampreyName, double lampreyOffset, boolean inverted){
         topMotor=new CachedMotorEx(hwMap, topMotorName);
@@ -21,7 +22,7 @@ public class Module {
         this.lampreyOffset=lampreyOffset;
         this.inverted=inverted;
     }
-    public double getModuleHeading(){
+    private double getModuleHeading(){
         double before_mod = lamprey.getVoltage()*360/2.189-this.lampreyOffset;
         if (before_mod<0){
             return before_mod+360;
@@ -45,8 +46,11 @@ public class Module {
         setMotors(forward-strafe, -forward-strafe);//diffy stuff
     }
     public void setRobotCentricPowers(double forward, double strafe){
-        double moduleHeading=getModuleHeading();
+        moduleHeading=getModuleHeading();
         Vector2d powerVector=new Vector2d(forward, strafe).rotateBy(moduleHeading);
         setModuleCentricPowers(powerVector.getX(), powerVector.getY());
+    }
+    public double getCachedHeading(){
+        return moduleHeading;
     }
 }

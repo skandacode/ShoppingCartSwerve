@@ -24,8 +24,8 @@ public class SwerveTeleop extends LinearOpMode {
                 left.setRobotCentricPowers(-gamepad1.left_stick_y + gamepad1.right_stick_x * 0.5, -gamepad1.left_stick_x);
                 right.setRobotCentricPowers(-gamepad1.left_stick_y - gamepad1.right_stick_x * 0.5, -gamepad1.left_stick_x);
             }
-            telemetry.addData("left pod lamprey", left.getModuleHeading());
-            telemetry.addData("right pod lamprey", right.getModuleHeading());
+            telemetry.addData("left pod lamprey", left.getCachedHeading());
+            telemetry.addData("right pod lamprey", right.getCachedHeading());
             telemetry.update();
         }
     }

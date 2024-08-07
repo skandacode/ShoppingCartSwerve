@@ -20,8 +20,8 @@ public class PodTester extends LinearOpMode {
         while (opModeIsActive()){
             left.setRobotCentricPowers(leftForwardPower, leftStrafePower);
             right.setRobotCentricPowers(rightForwardPower, rightStrafePower);
-            telemetry.addData("left pod lamprey", left.getModuleHeading());
-            telemetry.addData("right pod lamprey", right.getModuleHeading());
+            telemetry.addData("left pod lamprey", left.getCachedHeading());
+            telemetry.addData("right pod lamprey", right.getCachedHeading());
             telemetry.update();
         }
     }
