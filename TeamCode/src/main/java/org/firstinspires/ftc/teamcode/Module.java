@@ -9,13 +9,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Module {
-    Motor topMotor, bottomMotor;
+    CachedMotorEx topMotor, bottomMotor;
     AnalogInput lamprey;
     double lampreyOffset;
     boolean inverted;
+    double prevTopPower, prevBottomPower=0;
     public Module(HardwareMap hwMap, String topMotorName, String bottomMotorName, String lampreyName, double lampreyOffset, boolean inverted){
-        topMotor=new MotorEx(hwMap, topMotorName);
-        bottomMotor=new MotorEx(hwMap, bottomMotorName);
+        topMotor=new CachedMotorEx(hwMap, topMotorName);
+        bottomMotor=new CachedMotorEx(hwMap, bottomMotorName);
         lamprey=hwMap.analogInput.get(lampreyName);
         this.lampreyOffset=lampreyOffset;
         this.inverted=inverted;
@@ -33,8 +34,9 @@ public class Module {
             topPower=topPower/denom;
             bottomPower=bottomPower/denom;
         }
-        topMotor.set(topPower);
-        bottomMotor.set(bottomPower);
+        topMotor.setPower(topPower);
+        bottomMotor.setPower(bottomPower);
+
     }
     public void setModuleCentricPowers(double forward, double strafe){
         if (inverted){
