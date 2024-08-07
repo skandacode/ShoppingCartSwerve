@@ -1,6 +1,8 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drive;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.drive.Module;
 
 public class SwerveDrive {
     Module left, right;
@@ -11,5 +13,11 @@ public class SwerveDrive {
     public void driveRobotCentric(double forwardPower, double strafePower, double turnPower){
         left.setRobotCentricPowers(forwardPower - turnPower, strafePower);
         right.setRobotCentricPowers(forwardPower + turnPower, strafePower);
+    }
+    public Double[] getModuleCachedRotation(){
+        Double[] result=new Double[2];
+        result[0]=left.getCachedHeading();
+        result[2]= right.getCachedHeading();
+        return result;
     }
 }

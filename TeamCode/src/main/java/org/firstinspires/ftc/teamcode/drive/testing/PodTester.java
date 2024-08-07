@@ -1,13 +1,18 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drive.testing;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.drive.Module;
+
 @TeleOp
-public class SwerveTeleop extends LinearOpMode {
+@Config
+public class PodTester extends LinearOpMode {
     Module left, right;
+    public static double leftForwardPower, leftStrafePower, rightForwardPower, rightStrafePower=0;
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
@@ -15,15 +20,8 @@ public class SwerveTeleop extends LinearOpMode {
         right = new Module(hardwareMap, "rightTop", "rightBottom", "rightLamprey", 255, false);
         waitForStart();
         while (opModeIsActive()){
-            if (gamepad1.right_bumper){
-                left.setRobotCentricPowers(-gamepad1.left_stick_y*0.25+gamepad1.right_stick_x*0.15, -gamepad1.left_stick_x*0.25);
-                right.setRobotCentricPowers(-gamepad1.left_stick_y*0.25-gamepad1.right_stick_x*0.15, -gamepad1.left_stick_x*0.25);
-
-            }
-            else {
-                left.setRobotCentricPowers(-gamepad1.left_stick_y + gamepad1.right_stick_x * 0.5, -gamepad1.left_stick_x);
-                right.setRobotCentricPowers(-gamepad1.left_stick_y - gamepad1.right_stick_x * 0.5, -gamepad1.left_stick_x);
-            }
+            left.setRobotCentricPowers(leftForwardPower, leftStrafePower);
+            right.setRobotCentricPowers(rightForwardPower, rightStrafePower);
             telemetry.addData("left pod lamprey", left.getCachedHeading());
             telemetry.addData("right pod lamprey", right.getCachedHeading());
             telemetry.update();
