@@ -21,7 +21,7 @@ public class SwerveTesitng extends LinearOpMode {
         List<LynxModule> hubs = hardwareMap.getAll(LynxModule.class);
         hubs.forEach(hub -> hub.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
         telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
-        drive=new SwerveDrive(hardwareMap);
+        drive=new SwerveDrive(hardwareMap, telemetry);
         telemetry.addLine("Initialized");
         telemetry.update();
         waitForStart();
