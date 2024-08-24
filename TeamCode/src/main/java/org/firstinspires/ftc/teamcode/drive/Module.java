@@ -21,7 +21,7 @@ public class Module {
         this.inverted=inverted;
     }
     private double getModuleHeading(){
-        double before_mod = lamprey.getVoltage()*360/2.189-this.lampreyOffset;
+        double before_mod = lamprey.getVoltage()*360/2.2-this.lampreyOffset;//2.189
         if (before_mod<0){
             return before_mod+360;
         }

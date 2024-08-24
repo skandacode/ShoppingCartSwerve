@@ -8,7 +8,7 @@ public class SwerveDrive {
     Module left, right;
     public SwerveDrive(HardwareMap hwMap){
         left = new Module(hwMap, "leftTop", "leftBottom", "leftLamprey", 13, true);
-        right = new Module(hwMap, "rightTop", "rightBottom", "rightLamprey", 255, false);
+        right = new Module(hwMap, "rightTop", "rightBottom", "rightLamprey", 322.2, false);
     }
     public void driveRobotCentric(double forwardPower, double strafePower, double turnPower){
         left.setRobotCentricPowers(forwardPower - turnPower, strafePower);
@@ -17,7 +17,7 @@ public class SwerveDrive {
     public Double[] getModuleCachedRotation(){
         Double[] result=new Double[2];
         result[0]=left.getCachedHeading();
-        result[2]= right.getCachedHeading();
+        result[1]= right.getCachedHeading();
         return result;
     }
 }

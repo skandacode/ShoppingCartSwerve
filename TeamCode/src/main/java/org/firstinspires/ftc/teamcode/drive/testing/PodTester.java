@@ -17,7 +17,7 @@ public class PodTester extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
         left = new Module(hardwareMap, "leftTop", "leftBottom", "leftLamprey", 13, true);
-        right = new Module(hardwareMap, "rightTop", "rightBottom", "rightLamprey", 255, false);
+        right = new Module(hardwareMap, "rightTop", "rightBottom", "rightLamprey", 322.2, false);
         waitForStart();
         while (opModeIsActive()){
             left.setRobotCentricPowers(leftForwardPower, leftStrafePower);
