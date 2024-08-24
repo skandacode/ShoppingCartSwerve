@@ -28,25 +28,20 @@ public class Module {
         return before_mod;
     }
     public void setMotors(double topPower, double bottomPower){
-        double denom=Math.max(topPower, bottomPower);
-        if (denom>1){
-            topPower=topPower/denom;
-            bottomPower=bottomPower/denom;
-        }
         topMotor.setPower(topPower);
         bottomMotor.setPower(bottomPower);
 
     }
-    public void setModuleCentricPowers(double forward, double strafe){
+    public double[] setModuleCentricPowers(double forward, double strafe){
         if (inverted){
             forward=-forward;
         }
-        setMotors(forward-strafe, -forward-strafe);//diffy stuff
+        return new double[]{forward-strafe, -forward-strafe};//diffy stuff
     }
-    public void setRobotCentricPowers(double forward, double strafe){
+    public double[] setRobotCentricPowers(double forward, double strafe){
         moduleHeading=getModuleHeading();
         Vector2d powerVector=new Vector2d(forward, strafe).rotateBy(moduleHeading);
-        setModuleCentricPowers(powerVector.getX(), powerVector.getY());
+        return setModuleCentricPowers(powerVector.getX(), powerVector.getY());
     }
     public double getCachedHeading(){
         return moduleHeading;
