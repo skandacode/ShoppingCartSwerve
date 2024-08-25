@@ -6,20 +6,21 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.drive.Swerve;
 import org.firstinspires.ftc.teamcode.drive.SwerveDrive;
 
 import java.util.List;
 
 @TeleOp
 public class SwerveTeleopUsingClass extends LinearOpMode {
-    SwerveDrive swerveDrive;
+    Swerve swerveDrive;
 
     @Override
     public void runOpMode() throws InterruptedException {
         List<LynxModule> hubs = hardwareMap.getAll(LynxModule.class);
         hubs.forEach(hub -> hub.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
         telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
-        swerveDrive=new SwerveDrive(hardwareMap, telemetry);
+        swerveDrive=new Swerve(hardwareMap, telemetry);
         telemetry.addLine("Initialized");
         telemetry.update();
         waitForStart();

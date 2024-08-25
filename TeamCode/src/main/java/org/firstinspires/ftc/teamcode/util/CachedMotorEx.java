@@ -23,11 +23,11 @@ public class CachedMotorEx extends MotorEx {
         if (p==prevPower){
             return;
         }
-        if (Math.abs(p-prevPower)>0.01){
-            super.set(p);
-            this.prevPower=p;
-        }else if (p==0){
+        if (p==0){
             super.set(0);
+            this.prevPower=p;
+        }else if (Math.abs(p-prevPower)>0.01){
+            super.set(p);
             this.prevPower=p;
         }
     }
